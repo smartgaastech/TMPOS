@@ -293,6 +293,7 @@ class AddEditRepairOrder: UIViewController, UITextFieldDelegate,UITextViewDelega
                         previewBtn.setTitleColor(UIColor(red: 0, green: 190.0/255.0, blue: 0.5, alpha: 1.0), for: .normal)
                         previewBtn.backgroundColor = UIColor(red: 0.6, green: 190.0/255.0, blue: 0.7, alpha: 1.0)
                         previewBtn.addTarget(self, action: #selector(previewBtnAction), for: .touchUpInside)
+                        previewBtn.tag = index
                         DynamicControlScrollView.addSubview(previewBtn)
                         
                         let rightLeftCheckboxDic = NSMutableDictionary()
@@ -435,16 +436,23 @@ class AddEditRepairOrder: UIViewController, UITextFieldDelegate,UITextViewDelega
     }
     
     func previewBtnAction(sender: UIButton!){
-        let popoverContent = DateViewController()
+        let popoverContent = PopupImageViewController()
         let nav = UINavigationController(rootViewController: popoverContent)
         popoverContent.parentView = self
-        popoverContent.selectedDate = txtRepairOrderDate
         nav.modalPresentationStyle = UIModalPresentationStyle.popover
         let popover = nav.popoverPresentationController
-        popoverContent.preferredContentSize = CGSize(width: 400, height: 400)
-        popover!.sourceView = txtRepairOrderDate
-        popover!.sourceRect = txtRepairOrderDate.bounds
-        popover?.permittedArrowDirections = .up
+        popoverContent.preferredContentSize = CGSize(width: 800, height: 600)
+        
+        popover?.sourceRect = CGRect(x: self.view.bounds.midX, y: self.view.bounds.midY, width: 0, height: 0)
+        popover?.permittedArrowDirections = UIPopoverArrowDirection(rawValue: 0)
+        popover!.sourceView = self.view
+        let a = sender.tag
+        
+        let tempCtlDic = ctlsObjsDictionary.value(forKey: String(a)) as! NSMutableDictionary
+        var tempName = tempCtlDic.value(forKey: Constants.CTL_NAME) as! String
+        var truncated = tempName.substring(to: tempName.index(before: tempName.endIndex))
+        var image = truncated.replacingOccurrences(of: "(", with: "_").replacingOccurrences(of: " ", with: "_") + ".png"
+        popoverContent.imageName = image
         self.present(nav, animated: true, completion: nil)
     }
     
@@ -505,11 +513,17 @@ class AddEditRepairOrder: UIViewController, UITextFieldDelegate,UITextViewDelega
                 return
             }
         }
+        var salesOrderEntered = true
+        var invoiceEntered = true
+        var itemSelected = true
+        var warranty = true
+        var origcase = true
         if let val = txtSalesOrderNo.text {
             let trimedSt = val.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
             if trimedSt.isEmpty {
-                showErrorMsg("Mandatory Field!", message: "Please enter SalesOrder!")
-                return
+                salesOrderEntered = false
+                //showErrorMsg("Mandatory Field!", message: "Please enter SalesOrder!")
+                //return
             }
             // add code to check salesorder is valid and patient is linked
         }
@@ -537,16 +551,46 @@ class AddEditRepairOrder: UIViewController, UITextFieldDelegate,UITextViewDelega
         if let val = txtSalesInvoiceNo.text {
             let trimedSt = val.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
             if trimedSt.isEmpty {
-                showErrorMsg("Mandatory Field!", message: "Please select Sales Invoice No.")
-                return
+                //showErrorMsg("Mandatory Field!", message: "Please select Sales Invoice No.")
+                //return
+                invoiceEntered = false
             }
         }
         if let val = txtItemCode.text {
             let trimedSt = val.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
             if trimedSt.isEmpty {
-                showErrorMsg("Mandatory Field!", message: "Please select Item.")
-                return
+                //showErrorMsg("Mandatory Field!", message: "Please select Item.")
+                //return
+                itemSelected = false
             }
+        }
+        
+        if btnUnderWarranty.isSelected {
+            warranty = true
+        }else{
+            warranty = false
+        }
+        if btnOriginalCase.isSelected {
+            origcase = true
+        }else{
+            origcase = false
+        }
+        
+        if (!warranty || !origcase) && invoiceEntered && salesOrderEntered{
+            showErrorMsg("Error!", message: "Please enter either of Sales Order or Invoice Number and not both")
+            return
+        }
+        if (warranty || origcase) && !invoiceEntered {
+            showErrorMsg("Mandatory Field!", message: "Please select Sales Invoice No.")
+            return
+        }
+        if (!warranty || !origcase) && !invoiceEntered && !salesOrderEntered {
+            showErrorMsg("Mandatory Field!", message: "Please enter Sales Order or Invoice Number!")
+            return
+        }
+        if (warranty || origcase) && invoiceEntered && !itemSelected {
+            showErrorMsg("Mandatory Field!", message: "Please select Item.")
+            return
         }
         
         getValues(roInfo)

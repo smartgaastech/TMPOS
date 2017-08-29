@@ -62,7 +62,7 @@ class RepairOrderSummary: UIViewController,UITextFieldDelegate,UITextViewDelegat
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        webView.loadRequest(URLRequest(url: URL(string: "http://citrix.aljaber.ae/reports/repairorder/?repairorder=441" )!))
+        webView.loadRequest(URLRequest(url: URL(string: "http://citrix.aljaber.ae/reports/repairorder/?repairorder=" + roId )!))
     }
     
     @IBAction func btnEmail(_ sender: Any) {
