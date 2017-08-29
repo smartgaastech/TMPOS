@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<VariablesViewState
+   version = "1.0">
+   <ContextStates>
+      <ContextState
+         contextName = "WorkOrderController.performSyncRequest(BaseModel) -&gt; BaseModel:WorkOrderController.swift">
+      </ContextState>
+      <ContextState
+         contextName = "specialized BaseController.(performPostArrayRequest(BaseController) -&gt; (String, postBody : NSMutableDictionary) -&gt; NSMutableDictionary).(closure #1):BaseController.swift">
+      </ContextState>
+      <ContextState
+         contextName = "AddEditWorkOrder.PrescriptionNumberSelect(AnyObject) -&gt; ():AddEditWorkOrder.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "AddEditWorkOrder.PrescriptionButtonClick(AnyObject) -&gt; ():AddEditWorkOrder.swift">
+      </ContextState>
+   </ContextStates>
+</VariablesViewState>

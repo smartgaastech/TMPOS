@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<VariablesViewState
+   version = "1.0">
+   <ContextStates>
+      <ContextState
+         contextName = "CustomerDetailedInfoViewer.viewDidLoad() -&gt; ():CustomerDetailedInfoViewer.swift">
+      </ContextState>
+      <ContextState
+         contextName = "AddEditCustomerViewer.performSaveButtonAction(UIBarButtonItem) -&gt; ():AddEditCustomerViewer.swift">
+      </ContextState>
+      <ContextState
+         contextName = "CustomerHomeScreenController.performSaveOperation(BaseModel) -&gt; BaseModel:CustomerHomeScreenController.swift">
+      </ContextState>
+      <ContextState
+         contextName = "BaseController.performPostRequest(String, postBody : NSMutableDictionary) -&gt; NSMutableDictionary:BaseController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "CustomerHistoryController.performSearchByRxContactLensePmSysId(String) -&gt; CustomerHistoryModel:CustomerHistoryController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "AddEditCustomerViewer.viewDidLoad() -&gt; ():AddEditCustomerViewer.swift">
+      </ContextState>
+   </ContextStates>
+</VariablesViewState>
