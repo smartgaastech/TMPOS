@@ -74,6 +74,7 @@
 		6E4BA3B71DEAC18100A9F948 /* WorkOrderStatusTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E4BA3B61DEAC18100A9F948 /* WorkOrderStatusTableViewCell.swift */; };
 		6E4BA3B91DEDE3E900A9F948 /* WorkOrderDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E4BA3B81DEDE3E900A9F948 /* WorkOrderDetails.swift */; };
 		6E4BA3BB1DEFCC0200A9F948 /* WorkOrderStatusDetailTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E4BA3BA1DEFCC0200A9F948 /* WorkOrderStatusDetailTableViewCell.swift */; };
+		6E592CC01F572E0100908827 /* PopupImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E592CBF1F572E0100908827 /* PopupImageViewController.swift */; };
 		6E6762C11F19290C00CCFE91 /* RepairOrderModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E6762C01F19290C00CCFE91 /* RepairOrderModel.swift */; };
 		6E6762C31F19295600CCFE91 /* RepairOrderController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E6762C21F19295600CCFE91 /* RepairOrderController.swift */; };
 		6E6B86F51F03669900D4A51B /* RepairOrderHomeScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E6B86F41F03669900D4A51B /* RepairOrderHomeScreen.swift */; };
@@ -197,6 +198,7 @@
 		6E4BA3B61DEAC18100A9F948 /* WorkOrderStatusTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WorkOrderStatusTableViewCell.swift; sourceTree = "<group>"; };
 		6E4BA3B81DEDE3E900A9F948 /* WorkOrderDetails.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WorkOrderDetails.swift; sourceTree = "<group>"; };
 		6E4BA3BA1DEFCC0200A9F948 /* WorkOrderStatusDetailTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WorkOrderStatusDetailTableViewCell.swift; sourceTree = "<group>"; };
+		6E592CBF1F572E0100908827 /* PopupImageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PopupImageViewController.swift; sourceTree = "<group>"; };
 		6E6762C01F19290C00CCFE91 /* RepairOrderModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RepairOrderModel.swift; sourceTree = "<group>"; };
 		6E6762C21F19295600CCFE91 /* RepairOrderController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RepairOrderController.swift; sourceTree = "<group>"; };
 		6E6B86F41F03669900D4A51B /* RepairOrderHomeScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RepairOrderHomeScreen.swift; sourceTree = "<group>"; };
@@ -287,6 +289,7 @@
 				F0C6C3EC1D0AEB8300B12EC8 /* EmailPopoverView.swift */,
 				6E93AE3B1DBE3E120014AEE7 /* PrescriptionTypeController.swift */,
 				6E0895281E4447AD0072EADA /* WorkOrderTimer.swift */,
+				6E592CBF1F572E0100908827 /* PopupImageViewController.swift */,
 			);
 			name = helpers;
 			sourceTree = "<group>";
@@ -740,6 +743,7 @@
 				52D7B0541C81627D00FA9F44 /* SettingPageViewer.swift in Sources */,
 				52D7B0581C81659000FA9F44 /* CustomerHomeScreenViewer.swift in Sources */,
 				528DAC881C9799BE00FEBC56 /* RxGlassesController.swift in Sources */,
+				6E592CC01F572E0100908827 /* PopupImageViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
