@@ -131,7 +131,11 @@ class AddEditRepairOrder: UIViewController, UITextFieldDelegate,UITextViewDelega
         }
         if let val = roInfo?.value(forKey: Constants.JRH_INVOICE_NO) {
             let tempVal = val
-            txtSalesInvoiceNo.text = String(describing: tempVal)
+            if(String(describing: tempVal) == "0"){
+                txtSalesInvoiceNo.text = ""
+            }else{
+                txtSalesInvoiceNo.text = String(describing: tempVal)
+            }
         }
         if let val = roInfo?.value(forKey: Constants.JRH_INVOICE_ITEM_CODE) {
             txtItemCode.text = val as? String
@@ -606,10 +610,17 @@ class AddEditRepairOrder: UIViewController, UITextFieldDelegate,UITextViewDelega
             roInfo.setValue("0", forKey: Constants.JRH_NO)
             roInfo.setValue("SO", forKey: Constants.JRH_REF_TXN_CODE)
             roInfo.setValue("N", forKey: Constants.JRH_COMPLETED_YN)
-            let patientDict = getPatientDetailsFromSalesOrder()
-            let patientNo = patientDict.value(forKey: Constants.PM_SYS_ID) as! Int
-            roInfo.setValue(patientNo, forKey: Constants.JRH_PM_SYS_ID)
-            roInfo.setValue(patientDict.value(forKey: Constants.TRANS_PATIENT_NO), forKey: Constants.JRH_PATIENT_ID)
+            if txtSalesOrderNo.text == "" {
+                let patientDict = getPatientDetailsFromInvoice()
+                let patientNo = patientDict.value(forKey: Constants.PM_SYS_ID) as! Int
+                roInfo.setValue(patientNo, forKey: Constants.JRH_PM_SYS_ID)
+                roInfo.setValue(patientDict.value(forKey: Constants.TRANS_PATIENT_NO), forKey: Constants.JRH_PATIENT_ID)
+            }else{
+                let patientDict = getPatientDetailsFromSalesOrder()
+                let patientNo = patientDict.value(forKey: Constants.PM_SYS_ID) as! Int
+                roInfo.setValue(patientNo, forKey: Constants.JRH_PM_SYS_ID)
+                roInfo.setValue(patientDict.value(forKey: Constants.TRANS_PATIENT_NO), forKey: Constants.JRH_PATIENT_ID)
+            }
         }
         
         roModel.requestType.setValue(roInfo, forKey: Constants.SAVE_REPAIR_ORDER)
@@ -725,6 +736,39 @@ class AddEditRepairOrder: UIViewController, UITextFieldDelegate,UITextViewDelega
             }
         }
         
+    }
+    
+    func getPatientDetailsFromInvoice() -> NSMutableDictionary {
+        let set = CharacterSet(charactersIn: " .?")
+        let patientDic = NSMutableDictionary()
+        patientDic.setValue(0, forKey: Constants.PM_SYS_ID)
+        let workordermodel = WorkOrderModel()
+        let controller = WorkOrderController()
+        let searchReq = NSMutableDictionary()
+        //PrescriptionScrollView.showsVerticalScrollIndicator = true
+        searchReq.setValue(txtSalesInvoiceNo.text,  forKey: Constants.TRANS_NO)
+        workordermodel.requestType.setValue(searchReq, forKey: Constants.CU_SEARCH_BY_HISTORY_INVOICE)
+        let resModel = controller.performSyncRequest(workordermodel) as! WorkOrderModel
+        let resDic = resModel.responseResult
+        if(resDic.value(forKey: Constants.ERROR_RESPONSE) == nil) {
+            searcResultDic = resDic.value(forKey: Constants.CU_SEARCH_BY_HISTORY_INVOICE) as! NSMutableDictionary
+            let tempPatientNo = searcResultDic.value(forKey: Constants.TRANS_PATIENT_NO)
+            if (tempPatientNo! as AnyObject).trimmingCharacters(in: set) != "" {
+                let tempPatientName = searcResultDic.value(forKey: Constants.TRANS_PATIENT_NAME)
+                let tempSalesmanName = searcResultDic.value(forKey: Constants.TRANS_SALESMAN)
+                patientDic.setValue(tempPatientName, forKey: Constants.TRANS_PATIENT_NAME)
+                patientDic.setValue(tempPatientNo, forKey: Constants.TRANS_PATIENT_NO)
+                patientDic.setValue(tempSalesmanName, forKey: Constants.TRANS_SALESMAN)
+                var patientNoArr = (tempPatientNo as AnyObject).components(separatedBy: "-")
+                if patientNoArr.count > 1 {
+                    var temp = patientNoArr[1]
+                    patientDic.setValue( Int(temp)!, forKey: Constants.PM_SYS_ID)
+                }
+            }
+        }else {
+            showErrorMsg("Error Occurred", message: "Unabled to find the Sales Invoice details!")
+        }
+        return patientDic
     }
     
     func getPatientDetailsFromSalesOrder() -> NSMutableDictionary {

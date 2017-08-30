@@ -44,6 +44,23 @@ class WorkOrderController: BaseController {
             }
             responseModel.responseResult.setValue(responseDic, forKey: Constants.CU_SEARCH_BY_SALES_ORDER)
             responseModel.requestType = (reqModel?.requestType)!
+            
+        }else if(reqModel?.requestType.value(forKey: Constants.CU_SEARCH_BY_HISTORY_INVOICE) != nil){
+            let tempcus = reqModel?.requestType.value(forKey: Constants.CU_SEARCH_BY_HISTORY_INVOICE)  as! NSMutableDictionary
+            let postEndPoint : String = (adminModel.serverUrl) + "Patient/InvoiceDetails/0"
+            let postBody = NSMutableDictionary()
+            var responseDic : NSMutableDictionary = NSMutableDictionary()
+            postBody.setValue(tempcus.value(forKey: Constants.TRANS_NO), forKey: "TRANS_NO")
+            var res = NSMutableDictionary()
+            res = performPostRequest(postEndPoint, postBody: postBody)
+            if(res.value(forKey: Constants.ERROR_RESPONSE) != nil) {
+                responseDic = NSMutableDictionary()
+                responseDic.setValue(res.value(forKey: Constants.ERROR_RESPONSE), forKey: Constants.ERROR_RESPONSE)
+            } else {
+                responseDic = res
+            }
+            responseModel.responseResult.setValue(responseDic, forKey: Constants.CU_SEARCH_BY_HISTORY_INVOICE)
+            responseModel.requestType = (reqModel?.requestType)!
         } else if(reqModel?.requestType.value(forKey: Constants.CU_SEARCH_BY_PHONE_NO) != nil) {
             
                 let mobileNo : String = reqModel?.requestType.value(forKey: Constants.CU_SEARCH_BY_PHONE_NO) as! String
