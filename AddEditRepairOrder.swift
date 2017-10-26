@@ -852,17 +852,63 @@ class AddEditRepairOrder: UIViewController, UITextFieldDelegate,UITextViewDelega
         let controller = RepairOrderController()
         let searchReq = NSMutableDictionary()
         //PrescriptionScrollView.showsVerticalScrollIndicator = true
-        let txtItemCode = self.txtSalesInvoiceNo.text
+        let salesInvoiceNo = self.txtSalesInvoiceNo.text
+        let salesOrderNo = self.txtSalesOrderNo.text
         let set = CharacterSet(charactersIn: " .?")
-        let trimString = txtItemCode!.trimmingCharacters(in: set)
-        if trimString == "" {
-            showErrorMsg("Value Required", message: "Please enter the Sales Invoice No.!")
+        let trimInvString = salesInvoiceNo!.trimmingCharacters(in: set)
+        let trimSoString = salesOrderNo!.trimmingCharacters(in: set)
+        
+        var warranty = false
+        var origcase = false
+        var invoiceEntered = false
+        var salesOrderEntered = false
+
+        if btnUnderWarranty.isSelected {
+            warranty = true
         }else{
+            warranty = false
+        }
+        if btnOriginalCase.isSelected {
+            origcase = true
+        }else{
+            origcase = false
+        }
+        if trimInvString != "" {
+            invoiceEntered = true
+        }
+        if trimSoString != "" {
+            salesOrderEntered = true
+        }
+        
+        if (!warranty || !origcase) && invoiceEntered && salesOrderEntered{
+            showErrorMsg("Error!", message: "Please enter either of Sales Order or Invoice Number and not both")
+            return
+        }
+        if (warranty || origcase) && !invoiceEntered {
+            showErrorMsg("Mandatory Field!", message: "Sales Invoice No. is required, since warrany/original case is been selected")
+            return
+        }
+        if (!warranty || !origcase) && !invoiceEntered && !salesOrderEntered {
+            showErrorMsg("Mandatory Field!", message: "Please enter Sales Order or Invoice Number!")
+            return
+        }
+        
+        if invoiceEntered {
             searchReq.setValue(txtSalesInvoiceNo.text,  forKey: Constants.TRANS_NO)
             repairordermodel.requestType.setValue(searchReq, forKey: Constants.CU_SEARCH_BY_HISTORY_INVOICE)
             let resModel = controller.performSyncRequest(repairordermodel) as! RepairOrderModel
             let resDic = resModel.responseResult
             if(resDic.value(forKey: Constants.ERROR_RESPONSE) as! String != "nil") {
+                var invDic = NSMutableDictionary()
+                invDic = resDic.value(forKey: Constants.CU_SEARCH_BY_HISTORY_INVOICE) as! NSMutableDictionary
+                var rows = invDic.value(forKey: "TRANS_ITEM_ROWS") as! Int64
+                if(rows < 1){
+                    txtItemCode.text = ""
+                    txtItemName.text = ""
+                    showErrorMsg("Mandatory Field!", message: "Sales Invoice No. is incorrect!  Please enter a valid one")
+                    return
+                }
+               
                 searcResultDic = resDic.value(forKey: Constants.CU_SEARCH_BY_HISTORY_INVOICE) as! NSMutableDictionary
                 var dataArrays = NSMutableArray()
                 dataArrays = searcResultDic.value(forKey: Constants.TRANS_ITEMS) as! NSMutableArray!
@@ -876,6 +922,26 @@ class AddEditRepairOrder: UIViewController, UITextFieldDelegate,UITextViewDelega
             } else {
                 showErrorMsg("Sorry, unable to find the Sales Invoice,!", message: "Please check the Sales Invoice Number entered!")
                 txtSalesInvoiceNo.text = ""
+            }
+        }else {
+            searchReq.setValue(txtSalesOrderNo.text,  forKey: Constants.TRANS_NO)
+            repairordermodel.requestType.setValue(searchReq, forKey: Constants.CU_SEARCH_BY_SALES_ORDER)
+            let resModel = controller.performSyncRequest(repairordermodel) as! RepairOrderModel
+            let resDic = resModel.responseResult
+            if(resDic.value(forKey: Constants.ERROR_RESPONSE) as! String != "nil") {
+                searcResultDic = resDic.value(forKey: Constants.CU_SEARCH_BY_SALES_ORDER) as! NSMutableDictionary
+                var dataArrays = NSMutableArray()
+                dataArrays = searcResultDic.value(forKey: Constants.TRANS_ITEMS) as! NSMutableArray!
+                searcResultDic = NSMutableDictionary()
+                for dataArray in dataArrays {
+                    let tempDic = dataArray as! NSMutableDictionary
+                    searcResultDic.setValue(tempDic.value(forKey: Constants.ITEM_NAME), forKey: tempDic.value(forKey: Constants.ITEM_CODE) as! String)
+                }
+                invoiceItems = searcResultDic
+                performSegue(withIdentifier: "ToItemDetailsRepairOrder", sender: self)
+            } else {
+                showErrorMsg("Sorry, unable to find the Sales Order,!", message: "Please check the Sales Order Number entered!")
+                txtSalesOrderNo.text = ""
             }
         }
     }
@@ -1026,6 +1092,15 @@ class AddEditRepairOrder: UIViewController, UITextFieldDelegate,UITextViewDelega
             let resModel = controller.performSyncRequest(repairordermodel) as! RepairOrderModel
             let resDic = resModel.responseResult
             if(resDic.value(forKey: Constants.ERROR_RESPONSE) as! String != "nil") {
+                var invDic = NSMutableDictionary()
+                invDic = resDic.value(forKey: Constants.CU_SEARCH_BY_HISTORY_INVOICE) as! NSMutableDictionary
+                var rows = invDic.value(forKey: "TRANS_ITEM_ROWS") as! Int64
+                if(rows < 1){
+                    txtItemCode.text = ""
+                    txtItemName.text = ""
+                    showErrorMsg("Mandatory Field!", message: "Sales Invoice No. is incorrect!  Please enter a valid one")
+                    return
+                }
                 searcResultDic = resDic.value(forKey: Constants.CU_SEARCH_BY_HISTORY_INVOICE) as! NSMutableDictionary
                 performSegue(withIdentifier: "TOSalesInvoiceView", sender: self)
             } else {

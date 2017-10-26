@@ -16,7 +16,7 @@ class WorkOrderSummary: UIViewController,UITextFieldDelegate,UITextViewDelegate 
     var woId = ""
     var mobile = ""
     
-    /*@IBAction func printPage(_ sender: Any) {
+    @IBAction func printPage(_ sender: Any) {
         let url = URL(string: "http://citrix.aljaber.ae/reports/?workorder=" + woId)
         let stringurl = url?.absoluteString
         
@@ -31,7 +31,7 @@ class WorkOrderSummary: UIViewController,UITextFieldDelegate,UITextViewDelegate 
         pic.showsPageRange = false
         
         pic.present(animated: true, completionHandler: nil)
-    }*/
+    }
     
     @IBAction func btnTouchUp(_ sender: Any) {
         let url = URL(string: "http://citrix.aljaber.ae/reports/?workorder=" + woId)
