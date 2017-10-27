@@ -194,8 +194,6 @@ class WorkOrderStatus: UIViewController,UITableViewDataSource,UITableViewDelegat
         return 51.0
     }
     
-    
-    
     override func viewDidAppear(_ animated: Bool) {
         if let val = searchResultUpdater.value(forKey: Constants.LIST_VIEW_SEARCH_LOCATION_CODE) {
             txtLocationCreated.text = (val as? NSMutableDictionary)?.value(forKey: Constants.COMP_CODE) as? String

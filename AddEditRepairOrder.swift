@@ -60,6 +60,12 @@ class AddEditRepairOrder: UIViewController, UITextFieldDelegate,UITextViewDelega
         /*if soNo != "" {
             txtSalesOrderNo.text = soNo
         }*/
+        let date = Date()
+        let formatter = DateFormatter()
+        formatter.dateFormat = "dd-MM-yyyy"
+        let result = formatter.string(from: date)
+        txtRepairOrderDate.text = result
+        txtDeliveryDate.text = result
     }
     
     override func viewDidAppear(_ animated: Bool) {

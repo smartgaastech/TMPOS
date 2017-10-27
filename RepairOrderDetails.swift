@@ -77,6 +77,13 @@ class RepairOrderDetails: UIViewController, UITableViewDelegate, UITableViewData
         return cell
     }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let key = searchkeyResult[indexPath.row]
+        let dic = searchResult.value(forKey: key) as! NSDictionary
+        showErrorMsg("Remarks", message: dic.value(forKey: "JRD_REMARKS") as! String)
+        //print(dic.value(forKey: "JWD_REMARKS"))
+    }
+    
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 51.0
     }

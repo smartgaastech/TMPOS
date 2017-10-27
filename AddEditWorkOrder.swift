@@ -496,6 +496,12 @@ class AddEditWorkOrder: UIViewController,UITextFieldDelegate,UITextViewDelegate 
         if soNo != "" {
             txtSalesOrderNo.text = soNo
         }
+        let date = Date()
+        let formatter = DateFormatter()
+        formatter.dateFormat = "dd-MM-yyyy"
+        let result = formatter.string(from: date)
+        txtWorkOrderDate.text = result
+        txtDeliveryDate.text = result
     }
     
     

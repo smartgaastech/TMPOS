@@ -6652,7 +6652,7 @@
                                         <rect key="frame" x="0.0" y="28" width="836" height="53"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="ivA-BI-dM7" id="YNC-kv-bYj">
-                                            <rect key="frame" x="0.0" y="0.0" width="836" height="52.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="836" height="52"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" fixedFrame="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zAU-xD-7zE">
@@ -6858,16 +6858,16 @@
                         <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="1" sectionHeaderHeight="1" sectionFooterHeight="1" translatesAutoresizingMaskIntoConstraints="NO" id="d1a-Af-oZi">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="90" sectionHeaderHeight="1" sectionFooterHeight="1" translatesAutoresizingMaskIntoConstraints="NO" id="d1a-Af-oZi">
                                 <rect key="frame" x="0.0" y="394" width="1024" height="334"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="WorkOrderStatusDetailTableViewCell" rowHeight="53" id="qSf-gr-zrV" customClass="WorkOrderStatusDetailTableViewCell" customModule="TouchymPOS" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="1" width="1024" height="53"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="WorkOrderStatusDetailTableViewCell" rowHeight="90" id="qSf-gr-zrV" customClass="WorkOrderStatusDetailTableViewCell" customModule="TouchymPOS" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="1" width="1024" height="90"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="qSf-gr-zrV" id="tJf-KJ-dqZ">
-                                            <rect key="frame" x="0.0" y="0.0" width="1024" height="52.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="1024" height="89"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" fixedFrame="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4K8-5h-FIj">
@@ -10716,9 +10716,9 @@
         <segue reference="pLX-ER-WgL"/>
         <segue reference="TrE-gh-c0W"/>
         <segue reference="KGN-h5-0Bf"/>
-        <segue reference="rhJ-Va-XWV"/>
         <segue reference="wS9-zz-vEC"/>
         <segue reference="4Ef-mX-88o"/>
+        <segue reference="PBH-wz-cIG"/>
         <segue reference="skH-H4-syC"/>
         <segue reference="2CS-O9-5Gg"/>
         <segue reference="bUe-71-e5h"/>

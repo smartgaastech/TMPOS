@@ -37,6 +37,7 @@ class WorkOrderDetails: UIViewController,UITableViewDataSource,UITableViewDelega
     }
     
     
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationController?.setNavigationBarHidden(false, animated: true)
@@ -81,12 +82,31 @@ class WorkOrderDetails: UIViewController,UITableViewDataSource,UITableViewDelega
             dateFormatter.dateFormat = "dd-MM-yyyy"
             cell.lblWorkOrderDate.text =  dateFormatter.string(from: date!)
         }
+        //cell.tag = indexPath.row
+        //cell.target(forAction: "getAction:", withSender: self)
         return cell
+    }
+    
+    /*func getAction(sender:UITableViewCell)->Void {
+        if(sender.tag == 0) {
+            print("it worked")
+            let cell =  sender as! WorkOrderStatusDetailTableViewCell
+            print(cell.lblRemarks.text)
+        }
+    }*/
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let key = searchkeyResult[indexPath.row]
+        let dic = searchResult.value(forKey: key) as! NSDictionary
+        showErrorMsg("Remarks", message: dic.value(forKey: "JWD_REMARKS") as! String)
+        //print(dic.value(forKey: "JWD_REMARKS"))
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 51.0
     }
+    
+    
     
     @IBAction func btnUpdateStatus(_ sender: AnyObject) {
         if txtStatusCode.text == "" {
