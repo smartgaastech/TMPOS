@@ -136,13 +136,16 @@ class WorkOrderStatus: UIViewController,UITableViewDataSource,UITableViewDelegat
         let controller = WorkOrderController()
         getValues(woInfo)
         woInfo.setValue(adminDic.value(forKey: Constants.LOCN_CODE), forKey: Constants.WO_LOCN_ASSIGNED)
+        print(woInfo)
         woModel.requestType.setObject(woInfo, forKey: Constants.FILTER_WORK_ORDER_STATUS as NSCopying)
         let resModel = controller.performSyncRequest(woModel) as! WorkOrderModel
         let tempResulDic = resModel.responseResult.value(forKey: Constants.FILTER_WORK_ORDER_STATUS) as! NSMutableDictionary
         let errorMsg = tempResulDic.value(forKey: Constants.ERROR_RESPONSE) as? String
         if errorMsg == nil  {
             searchResult = resModel.responseResult.value(forKey: Constants.FILTER_WORK_ORDER_STATUS) as! NSMutableDictionary
-            searchkeyResult = searchResult.allKeys as! [String]
+            let sortedKeys = (searchResult.allKeys as! [String]).sorted(by: <) as Array
+            searchkeyResult = sortedKeys
+            //searchkeyResult = searchResult.allKeys as! [String]
         } else if errorMsg == Constants.SEARCH_NO_RESULT {
             let alertController : UIAlertController = UIAlertController(title: "Sorry!!", message: "No Work Orders available.",preferredStyle: UIAlertControllerStyle.alert)
             alertController.addAction(UIAlertAction(title:"Dismis",style: UIAlertActionStyle.default,handler: nil))

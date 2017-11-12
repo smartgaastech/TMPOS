@@ -62,7 +62,8 @@ class RepairOrderStatus: UIViewController,UITableViewDelegate, UITableViewDataSo
         let jwhno = dic.value(forKey: "JRH_NO") as! NSInteger
         cell.lblRONumber.text = "\(jwhno)"
         let dobStr = dic.value(forKey: "JRH_CR_DT") as? String
-        cell.lblROStatus.text = dic.value(forKey: "JRD_STATUS_CODE") as? String
+        cell.lblROStatus.text = dic.value(forKey: "STATUS_DESC") as? String
+        //cell.lblROStatus.text = dic.value(forKey: "JRD_STATUS_CODE") as? String
         if dobStr != nil {
             let range = dobStr!.characters.index(dobStr!.startIndex, offsetBy: 0)..<dobStr!.characters.index(dobStr!.startIndex, offsetBy: 10)
             let dateFormatter = DateFormatter()

@@ -102,7 +102,8 @@ class WorkOrderHomeScreen: UIViewController, UITableViewDataSource, UISearchBarD
         let jwhno = dic.value(forKey: "JWH_NO") as! NSInteger
         cell.lblWorkOrderNo.text = "\(jwhno)"
         let dobStr = dic.value(forKey: "JWH_CR_DT") as? String
-        cell.lblStatus.text = dic.value(forKey: "JWD_STATUS_CODE") as? String
+        //cell.lblStatus.text = dic.value(forKey: "JWD_STATUS_CODE") as? String
+        cell.lblStatus.text = dic.value(forKey: "TPOSWOD_STATUS_CODE_DESC") as? String
         if dobStr != nil {
             let range = dobStr!.characters.index(dobStr!.startIndex, offsetBy: 0)..<dobStr!.characters.index(dobStr!.startIndex, offsetBy: 10)
             let dateFormatter = DateFormatter()

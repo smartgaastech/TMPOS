@@ -166,7 +166,9 @@ class WorkOrderDetails: UIViewController,UITableViewDataSource,UITableViewDelega
         let errorMsg = tempResulDic.value(forKey: Constants.ERROR_RESPONSE) as? String
         if errorMsg == nil  {
             searchResult = resModel.responseResult.value(forKey: Constants.FIND_WORK_ORDER_STATUSES) as! NSMutableDictionary
-            searchkeyResult = searchResult.allKeys as! [String]
+            let sortedKeys = (searchResult.allKeys as! [String]).sorted(by: <) as Array
+            searchkeyResult = sortedKeys
+            //searchkeyResult = searchResult.allKeys as! [String]
         } else if errorMsg == Constants.SEARCH_NO_RESULT {
             let alertController : UIAlertController = UIAlertController(title: "Sorry!!", message: "No Work Orders available.",preferredStyle: UIAlertControllerStyle.alert)
             alertController.addAction(UIAlertAction(title:"Dismis",style: UIAlertActionStyle.default,handler: nil))
@@ -241,6 +243,20 @@ class WorkOrderDetails: UIViewController,UITableViewDataSource,UITableViewDelega
             destinationVC.barButtonSave.isEnabled = false
         }else if segue.identifier == "ToWorkOrderStatus" {
             let destVc = segue.destination as? CompanyCodeListView
+            //let fruitsDict = ["apple": 5, "pear": 9, "grape": 1]
+            //let fruitsTupleArray = fruitsDict.sorted{ $0.key > $1.key }
+            
+            //let dictionary: NSDictionary = ["a" : 1, "b" : 2]
+            //let sortedKeys = (dictionary.allKeys as! [String]).sorted(by: <)
+            
+            /*let dictionary: NSDictionary = ["a" : 1, "b" : 2]
+            let sortedKeys = (searcResultDic.allKeys as! [String]).sorted(by: <) as Array
+            
+            let tempSearchResultDic = NSMutableDictionary()
+            for i in 0 ..< sortedKeys.count  {
+                tempSearchResultDic.setValue(searcResultDic.value(forKey: sortedKeys[i]), forKey: sortedKeys[i])
+            }*/
+            
             destVc?.dataDic = searcResultDic
             destVc?.parentView = self
             destVc?.searchType = Constants.LIST_VIEW_SEARCH_WORKORDER_STATUS

@@ -42,7 +42,10 @@ class CompanyCodeListView: UIViewController, UITableViewDataSource,UITableViewDe
         tblListOfCodes.dataSource = self
         tblListOfCodes.separatorStyle = UITableViewCellSeparatorStyle.none
         tblListOfCodes.isScrollEnabled = true
-        dataKey = dataDic.allKeys as! [String]
+        
+        let sortedKeys = (dataDic.allKeys as! [String]).sorted(by: <) as Array
+        dataKey = sortedKeys as! [String]
+        //dataKey = dataDic.allKeys as! [String]
     }
     
     func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {

@@ -298,6 +298,7 @@ open class BaseController: Constants, NSURLConnectionDelegate, XMLParserDelegate
                 
                 do {
                     let resArray = try JSONSerialization.jsonObject(with: data, options: JSONSerialization.ReadingOptions.mutableContainers) as! NSArray
+                    
                     let arrayCount:Int = resArray.count
                     if arrayCount > 0 {
                         print("The total No of response in array get get response array Size is : \(arrayCount)")

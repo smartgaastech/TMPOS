@@ -593,7 +593,7 @@
 					};
 					526696671C80C1300000171C = {
 						CreatedOnToolsVersion = 7.2;
-						DevelopmentTeam = 8VYTZ28UCU;
+						DevelopmentTeam = 995BP8KDPK;
 						LastSwiftMigration = 0820;
 						TestTargetID = 526696531C80C1300000171C;
 					};
@@ -915,7 +915,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
-				DEVELOPMENT_TEAM = 8VYTZ28UCU;
+				DEVELOPMENT_TEAM = 995BP8KDPK;
 				INFOPLIST_FILE = TouchymPOSTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.aljaber.TouchymPOSTests;
@@ -929,7 +929,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
-				DEVELOPMENT_TEAM = 8VYTZ28UCU;
+				DEVELOPMENT_TEAM = 995BP8KDPK;
 				INFOPLIST_FILE = TouchymPOSTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.aljaber.TouchymPOSTests;
