@@ -56,6 +56,7 @@ class AddEditRepairOrder: UIViewController, UITextFieldDelegate,UITextViewDelega
         //operationType = Constants.OPERATION_TYPE_ADD
         if operationType == Constants.OPERATION_TYPE_ADD {
             lblLocationCreated.text = adminModel.userDataDic.value(forKey: Constants.LOCN_CODE) as? String
+            txtLocationAssigned.text = "099"
         }
         /*if soNo != "" {
             txtSalesOrderNo.text = soNo
